@@ -20,7 +20,7 @@ lint:
 	golint
 get:
 	go get
-image: build_darwin
+image: 
 	docker build . -t ${REGISTRY}/${APP}:${VERSION}-$(TARGETARCH)
 push: image
 	docker tag ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH} ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
