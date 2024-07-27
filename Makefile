@@ -6,13 +6,13 @@ REGISTRY=ghcr.io/sartsr
 
 
 
-format:
-	gofmt -s -w ./
-build_darwin: format get
+#format:
+#	gofmt -s -w ./
+build_darwin: get
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/SartSR/kbot/cmd.appVersion=${VERSION}
-build_linux: format get
+build_linux:  get
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/SartSR/kbot/cmd.appVersion=${VERSION}
-build: format get
+build:  get
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/SartSR/kbot/cmd.appVersion=${VERSION}
 test:
 	go test -v
