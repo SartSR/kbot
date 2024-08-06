@@ -1,5 +1,5 @@
-VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-#VERSION=1.0.2
+#VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
+VERSION=1.0.2
 TARGETOS=linux#linux windows
 TARGETARCH=arm64#amd64
 APP=$(shell basename $(shell git remote get-url origin))
