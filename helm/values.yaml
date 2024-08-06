@@ -3,23 +3,17 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
-
 image:
   repository: sartsr/kbot.git
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "V1.0.2-1c2b484"
+  tag: "kbot-a74c6c5"
   arch: "arm64"
-
-
 secret:
   name: "kbot"
   env: "TELE_TOKEN"
-  key:  "token"
- 
+  key: "token"
 securityContext:
   privileged: true
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
-
-
