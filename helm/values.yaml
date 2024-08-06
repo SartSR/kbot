@@ -6,9 +6,8 @@ replicaCount: 1
 image:
   repository: sartsr/kbot.git
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "kbot-446be9d"
+  tag: "kbot-0e1a0b0"
   arch: "arm64"
-  
 secret:
   name: "kbot"
   env: "TELE_TOKEN"
