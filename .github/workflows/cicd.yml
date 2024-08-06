@@ -11,7 +11,6 @@ jobs:
          uses: actions/checkout@v3
          with:
            fetch-depth: 0
-       - name: Setup Node
        - name: Run test
          run: make test
        - name: Docker Hub Login
@@ -23,5 +22,5 @@ jobs:
          env:
            APP: "kbot"
            REGISTRY: ${{ secrets.DOCKERHUB_USERNAME }}
-           run: make image push
+         run: make image push
       
