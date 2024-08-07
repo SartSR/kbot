@@ -1,7 +1,7 @@
 FROM quay.io/projectquay/golang:1.22 as builder
 WORKDIR /go/src/app
 COPY . .
-RUN make build_darwin
+RUN make build
 
 FROM scratch
 WORKDIR /
