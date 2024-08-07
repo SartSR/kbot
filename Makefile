@@ -23,7 +23,7 @@ lint:
 get:
 	go get
 image: 
-	docker build --platform ${TARGETOS}/$(TARGETARCH) . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-$(TARGETARCH)
+	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-$(TARGETARCH)
 push: image
 	docker tag ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-$(TARGETARCH) ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-$(TARGETARCH)
 	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-$(TARGETARCH)
