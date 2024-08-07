@@ -12,7 +12,7 @@ image:
   tag: "V1.0.3-757f93f"
 >>>>>>> 6e22181 (update version V1.0.3-757f93f)
   os: "linux"
-  arch: "amd64"
+  arch: "arm64"
 secret:
   name: "kbot"
   env: "TELE_TOKEN"
