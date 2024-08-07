@@ -6,7 +6,7 @@ replicaCount: 1
 image:
   repository: ghcr.io/sartsr/kbot
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "V1.0.3-191b07c"
+  tag: "V1.0.3-ab0c387"
   os: "linux"
   arch: "arm64"
   version: "V1.0.3"
