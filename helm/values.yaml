@@ -1,12 +1,12 @@
 # Default values for helm.
 # This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# Declare variables to be passed into your templates.dock
 
 replicaCount: 1
 image:
   repository: ghcr.io/sartsr/kbot
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "V1.0.3-757f93f"
+  tag: "v1.0.3-1010e10"
   os: "linux"
   arch: "amd64"
 secret:
