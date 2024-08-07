@@ -10,7 +10,7 @@ env:
 jobs:
   ci:
      name: CI
-     runs-on: macos-latest
+     runs-on: macos-latest-xlarge
      permissions:
        contents: read
        packages: write
