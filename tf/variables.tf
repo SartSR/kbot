@@ -11,7 +11,7 @@ variable "GOOGLE_REGION" {
 
 variable "GKE_MACHINE_TYPE" {
   type        = string
-  default     = "g1-small"
+  default     = "e2-standard-2"
   description = "Machine type"
 }
 
@@ -38,7 +38,7 @@ variable "github_owner" {
 }
 variable "FLUX_GITHUB_REPO" {
   type        = string
-  default     = "flux-gitops"
+  default     = "flux-gitops-1"
   description = "The name of the Flux GitHub repository"
 }
 variable "github_token" {
