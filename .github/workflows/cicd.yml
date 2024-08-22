@@ -10,7 +10,7 @@ env:
 jobs:
   ci:
      name: CI
-     runs-on: macos-14
+     runs-on: ubuntu-latest
      permissions:
        contents: read
        packages: write
