@@ -20,7 +20,7 @@ module "gke_cluster" {
   GKE_MACHINE_TYPE = var.GKE_MACHINE_TYPE
 }
 module "flux_bootstrap" {
-    source = "github.com/den-vasyliev/tf-fluxcd-flux-bootstrap"
+    source = "github.com/SartSR/tf-fluxcd-flux-bootstrap"
     github_repository = "${var.github_owner}/${var.FLUX_GITHUB_REPO}"
     github_token = var.github_token 
     private_key = module.tls_private_key.private_key_pem
