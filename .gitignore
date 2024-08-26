@@ -60,3 +60,4 @@ override.tf.json
 .terraformrc
 terraform.rc
 .infracost/
+gitleaks-report.json
