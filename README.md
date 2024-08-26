@@ -1,4 +1,6 @@
 # Telebot project  t.me/sartsr_bot
+## contain pre-commit script sample in /scripts/pre-commit.samle
+## copy and rename to local './.git/hooks/pre-commit' directory, script will work fully autonomous
 ### GoLang (cobra-cli,telebot v3)
 ``` go
 export GOPATH=$HOME/go
