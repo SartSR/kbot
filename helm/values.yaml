@@ -6,7 +6,7 @@ replicaCount: 1
 image:
   repository: sartsr
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.4-e0265ee"
+  tag: "v1.0.4-89b1e1d"
   os: "linux"
   arch: "amd64"
 secret:
