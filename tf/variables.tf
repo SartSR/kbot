@@ -11,7 +11,7 @@ variable "GOOGLE_REGION" {
 
 variable "GKE_MACHINE_TYPE" {
   type        = string
-  default     = "g1-small"
+  default     = "e2-standard-2"
   description = "Machine type"
 }
 
@@ -33,8 +33,8 @@ variable "GKE_POOL_NAME" {
   description = "GKE pool name"
 }
 variable "github_owner" {
-    type = string
-    default = "SartSR"
+  type    = string
+  default = "SartSR"
 }
 variable "FLUX_GITHUB_REPO" {
   type        = string
