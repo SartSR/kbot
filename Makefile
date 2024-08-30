@@ -3,8 +3,8 @@ VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HE
 TARGETOS=linux#linux windows
 TARGETARCH=amd64#amd64
 APP=$(shell basename $(shell git remote get-url origin))
-REGISTRY=ghcr.io/sartsr
-#REGISTRY=sartsr
+#REGISTRY=ghcr.io/sartsr
+REGISTRY=sartsr
 DOCKER_CONTAINERS=$(docker ps -a -q)                                                                 
 DOCKER_IMAGES=$(docker images -q) 
 
