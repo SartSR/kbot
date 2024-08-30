@@ -25,7 +25,6 @@ module "flux_bootstrap" {
   github_token      = var.github_token
   private_key       = module.tls_private_key.private_key_pem
   config_path       = module.gke_cluster.kubeconfig
-
 }
 
 module "gke-workload-identity" {

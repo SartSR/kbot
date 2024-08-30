@@ -25,8 +25,8 @@ get:
 image: 
 	docker build --platform ${TARGETOS}/$(TARGETARCH) . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-$(TARGETARCH)
 push: image
-	docker tag ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-$(TARGETARCH) ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-$(TARGETARCH)
-	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-$(TARGETARCH)
+	docker tag  ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
+	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
 clean:
 	rm -rf kbot 
-	docker rmi ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-$(TARGETARCH)
+	docker rmi ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}

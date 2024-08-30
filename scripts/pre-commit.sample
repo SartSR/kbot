@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Function to install Gitleaks based on the OS
+install_gitleaks() {
+  echo "Deploy Gitleaks..."
+
+  # Detect OS
+  OS=$(uname -s)
+  case "$OS" in
+    Linux)
+      echo "Detected Linux"
+      curl -sSL -o gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_linux_x64.tar.gz
+      tar -xf gitleaks.tar.gz gitleaks
+      ;;
+    Darwin)
+      echo "Detected macOS"
+      curl -sSL -o gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_darwin_arm64.tar.gz
+      tar -xf gitleaks.tar.gz gitleaks
+      ;;
+    CYGWIN*|MINGW32*|MSYS*|MINGW*)
+      echo "Detected Windows"
+      curl -sSL -o gitleaks.zip https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_windows_x64.zip
+      unzip gitleaks.zip gitleaks.exe
+      ;;
+    *)
+      echo "Unsupported OS: $OS"
+      exit 1
+      ;;
+  esac
+
+  # Make executable
+  chmod +x gitleaks
+  mv gitleaks /usr/local/bin/gitleaks || {
+    echo "Failed to move gitleaks to /usr/local/bin. Make sure you have the correct permissions."
+    exit 1
+  }
+
+  echo "Gitleaks installed!"
+}
+
+# Check if Gitleaks is present
+if ! command -v gitleaks &> /dev/null; then
+  echo "Gitleaks not found!"
+  install_gitleaks
+else
+  echo "Gitleaks is already installed."
+fi
+
+# Run Gitleaks to check for secrets
+echo "Running Gitleaks..."
+gitleaks detect --source . --report-format json --report-path gitleaks-report.json
+
+# Check if any secrets were found
+if [ $? -ne 0 ]; then
+  echo "Secrets detected! Please check gitleaks-report.json for details."
+  exit 1
+else
+  echo "No secrets detected."
+fi
+
+exit 0

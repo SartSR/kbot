@@ -1,4 +1,6 @@
 # Telebot project  t.me/sartsr_bot
+## contain pre-commit script sample in /scripts/pre-commit.samle
+## copy and rename/make executable to your local './.git/hooks/pre-commit' project directory, script will work fully autonomous, just check ## gitleaks-report.json
 ### GoLang (cobra-cli,telebot v3)
 ``` go
 export GOPATH=$HOME/go
