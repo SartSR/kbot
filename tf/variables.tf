@@ -33,12 +33,12 @@ variable "GKE_POOL_NAME" {
   description = "GKE pool name"
 }
 variable "github_owner" {
-    type = string
-    default = "SartSR"
+  type    = string
+  default = "SartSR"
 }
 variable "FLUX_GITHUB_REPO" {
   type        = string
-  default     = "flux-gitops-1"
+  default     = "flux-gitops"
   description = "The name of the Flux GitHub repository"
 }
 variable "github_token" {
