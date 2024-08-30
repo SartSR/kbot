@@ -1,59 +1,54 @@
 name: KBOT-CICD
 
-on: 
-  push:
-    branches:
-      - develop
+on: push
+
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}  
+  TARGETARCH: amd64
+  
 jobs:
   ci:
-     name: CI
-     runs-on: ubuntu-latest
-     permissions:
-       contents: read
-       packages: write
-       attestations: write
-       id-token: write
-     steps:
-       - name: Checkout
-         uses: actions/checkout@v3
-         with:
-           fetch-depth: 0
-       - name: Run test
-         run: make test
-       - name: Container registry Login
-         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
-         with:
-           registry: ${{ env.REGISTRY }}
-           username: ${{ github.actor }}
-           password: ${{ secrets.GITHUB_TOKEN }}
-       - name: Extract metadata (tags, labels) for Docker
-         id: meta
-         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-       - name: Build and push Docker image
-         env:
-           APP: "kbot"
-           REGISTRY: ${{ env.REGISTRY }}
-         run: make image push
+    name: CI
+    runs-on: ubuntu-latest
 
+    steps:
+                          
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Run test
+        run: make test
+
+      - name: Docker Hub login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build&Push
+        env:
+          APP: "kbot"
+          REGISTRY: ${{ secrets.DOCKERHUB_USERNAME }}
+        run: make image push TARGETARCH=$TARGETARCH
+      - name: Clean
+        run: make clean TARGETARCH=$TARGETARCH
+      
   cd:
-     name: CD
-     needs: ci
-     runs-on: ubuntu-latest
-     steps:
-     - uses: actions/checkout@v3
-       with:
-         fetch-depth: 0
-     - run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-     - uses: mikefarah/yq@v4
-       with:
-         cmd: yq -i '.image.tag=strenv(VERSION)' helm/values.yaml
-     - run: |
-         git config user.name github-actions
-         git config user.email github-actions@github.com
-         git commit -am "update version $VERSION"
-         git push
+    name: CD
+    needs: ci
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+    - uses: mikefarah/yq@master
+      with:
+        cmd: yq -i '.image.tag=strenv(VERSION) | .image.arch=strenv(TARGETARCH)' helm/values.yaml
+    - run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git commit -am "update version $VERSION"
+        git push
